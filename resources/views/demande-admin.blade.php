@@ -363,25 +363,17 @@
             <ul>
               <li><a href="{{ route('home-page') }}#@lang("Home")" class="active">@lang("Home")</a></li>
               <li><a href="{{ route('home-page') }}#@lang("About")">@lang("About")</a></li>
-              <li><a href="{{ route('home-page') }}#@lang("Catalogue")">@lang("Catalogue")</a></li>
+              @if (auth()->user()->type_user == 'admin')
+            <li class="dropdown"><a href="{{ route('home-page') }}#@lang("Catalogue")"><span>@lang("Catalogue")</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="{{ route('catalogue.admin') }}">@lang('Cree Catalogue')</a></li>
+            </ul>
+          </li>
+          <li><a href="{{ route("admin-demande-service") }}">@lang("Demandes")</a></li>
+          @else
+          <li><a href="{{ route('home-page') }}#@lang("Catalogue")">@lang("Catalogue")</a></li>
+          @endif
               <li><a href="{{ route('home-page') }}#@lang("Services")">@lang("Services")</a></li>
-              {{-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Dropdown 1</a></li>
-                  <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                    <ul>
-                      <li><a href="#">Deep Dropdown 1</a></li>
-                      <li><a href="#">Deep Dropdown 2</a></li>
-                      <li><a href="#">Deep Dropdown 3</a></li>
-                      <li><a href="#">Deep Dropdown 4</a></li>
-                      <li><a href="#">Deep Dropdown 5</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Dropdown 2</a></li>
-                  <li><a href="#">Dropdown 3</a></li>
-                  <li><a href="#">Dropdown 4</a></li>
-                </ul>
-              </li> --}}
               <li><a href="{{ route('home-page') }}#@lang("Contact")">@lang("Contact")</a></li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -448,43 +440,12 @@
                         <p class="demande-telephone">Tél: {{ $demande['telDemande'] }}</p>
                     </div>
                     <div class="demande-actions">
-                        <button class="btn-voir">Voir détails</button>
+                      <a href="{{ route('demande-voir',['demande_id']) }}"><button class="btn-voir">Voir détails</button></a>
                         <button class="btn-supprimer">Supprimer</button>
                     </div>
                 </div>
                 @endforeach
             @endif
-            <!-- Exemple de demande -->
-            <div class="demande-card">
-                <div class="demande-header">
-                    <span class="demande-nom">Dupont Jean</span>
-                    <span class="demande-statut statut-en_attente">En attente</span>
-                </div>
-                <div class="demande-content">
-                    <p class="demande-description">Je souhaite obtenir des informations sur les modalités de paiement pour le service premium.</p>
-                    <p class="demande-telephone">Tél: 06 12 34 56 78</p>
-                </div>
-                <div class="demande-actions">
-                    <button class="btn-voir">Voir détails</button>
-                    <button class="btn-supprimer">Supprimer</button>
-                </div>
-            </div>
-            
-            <!-- Autre exemple de demande -->
-            <div class="demande-card">
-                <div class="demande-header">
-                    <span class="demande-nom">Martin Sophie</span>
-                    <span class="demande-statut statut-traitee">Traitée</span>
-                </div>
-                <div class="demande-content">
-                    <p class="demande-description">Problème de connexion à mon compte depuis hier soir.</p>
-                    <p class="demande-telephone">Tél: 07 89 12 34 56</p>
-                </div>
-                <div class="demande-actions">
-                    <button class="btn-voir">Voir détails</button>
-                    <button class="btn-supprimer">Supprimer</button>
-                </div>
-            </div>
         </div>
     </div>
 

@@ -60,6 +60,9 @@ class UserController extends Controller
         $deja_inscrire = User::where('email', $email)->first();
         if ($deja_inscrire) {
             auth()->login($deja_inscrire);
+            if($deja_inscrire->type_user == 'admin'){
+                return redirect()->route('catalogue.admin');
+            }
             return redirect()->route("home-page");
         } else {
             $newUser = User::create([
